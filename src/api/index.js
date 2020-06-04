@@ -2,9 +2,15 @@ import axios from 'axios';
 
 const ENDPOINT = 'https://covid19.mathdro.id/api';
 
-export const fetchData = async () => {
+export const fetchData = async country => {
+  let customEndpoint = ENDPOINT;
+
+  if (country) {
+    customEndpoint += `/countries/${country}`;
+  }
+
   try {
-    const {data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(ENDPOINT);
+    const {data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(customEndpoint);
     return { confirmed, recovered, deaths, lastUpdate };
   } catch(err) {
     console.log(err);
