@@ -24,3 +24,12 @@ export const fetchDailyData = async () => {
     console.log(err);
   }
 }
+
+export const fetchCountries = async () => {
+  try {
+    const { data: { countries }} = await axios.get(`${ENDPOINT}/countries`);
+    return countries.map(country => country.name);
+  } catch(err) {
+    console.log(err);
+  }
+}
